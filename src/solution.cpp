@@ -2,6 +2,28 @@
 
 using namespace parallelschedulingsolver;
 
+double Solution::objective_value() const
+{
+    if (!feasible()) {
+        return (objective_direction(this->instance().objective()) == optimizationtools::ObjectiveDirection::Minimize)?
+            +std::numeric_limits<double>::infinity():
+            -std::numeric_limits<double>::infinity();
+    }
+    switch (this->instance().objective()) {
+    case Objective::Makespan:
+        return this->makespan();
+    case Objective::TotalFlowTime:
+        return this->total_flow_time();
+    case Objective::TotalTardiness:
+        return this->total_tardiness();
+    case Objective::MaximumLateness:
+        return this->maximum_lateness();
+    case Objective::Throughput:
+        return this->throughput();
+    }
+    return -1;
+}
+
 bool Solution::feasible() const
 {
     return (this->number_of_jobs_ == instance().number_of_jobs());
