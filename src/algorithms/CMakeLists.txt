@@ -1,0 +1,8 @@
+add_library(ParallelSchedulingSolver_greedy_longest_processing_time)
+target_sources(ParallelSchedulingSolver_greedy_longest_processing_time PRIVATE
+    greedy_longest_processing_time.cpp)
+target_include_directories(ParallelSchedulingSolver_greedy_longest_processing_time PUBLIC
+    ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(ParallelSchedulingSolver_greedy_longest_processing_time PUBLIC
+    ParallelSchedulingSolver_parallelschedulingsolver)
+add_library(ParallelSchedulingSolver::greedy_longest_processing_time ALIAS ParallelSchedulingSolver_greedy_longest_processing_time)
